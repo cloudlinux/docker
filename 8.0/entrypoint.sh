@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 # set odoo database host, port, user and password
 : ${PGHOST:=$DB_PORT_5432_TCP_ADDR}
@@ -12,13 +13,13 @@ export PGHOST PGPORT PGUSER PGPASSWORD
 case "$1" in
 	--)
 		shift
-		exec openerp-server "$@"
+		exec gosu odoo openerp-server "$@"
 		;;
 	-*)
-		exec openerp-server "$@"
+		exec gosu odoo openerp-server "$@"
 		;;
 	*)
-		exec "$@"
+		exec gosu odoo "$@"
 esac
 
 exit 1
