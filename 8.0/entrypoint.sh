@@ -10,6 +10,14 @@ set -x
 : ${PGPASSWORD:=$DB_ENV_POSTGRES_PASSWORD}
 export PGHOST PGPORT PGUSER PGPASSWORD
 
+if [[ ! -d /var/lib/odoo/etc ]]; then
+   mkdir -p /var/lib/odoo/etc
+   mv /etc/odoo/openerp-server.conf /var/lib/odoo/etc/openerp-server.conf
+fi
+rm -f /etc/odoo/openerp-server.conf
+ln -s /var/lib/odoo/etc/openerp-server.conf /etc/odoo/openerp-server.conf
+chown -R odoo /etc/odoo /var/lib/odoo
+
 case "$1" in
 	--)
 		shift
