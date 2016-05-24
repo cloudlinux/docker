@@ -10,6 +10,8 @@ set -x
 : ${PGPASSWORD:=$DB_ENV_POSTGRES_PASSWORD}
 export PGHOST PGPORT PGUSER PGPASSWORD
 
+chown -R odoo /var/lib/odoo
+
 case "$1" in
 	--)
 		shift
